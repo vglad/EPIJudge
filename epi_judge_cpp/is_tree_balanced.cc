@@ -1,12 +1,12 @@
 #include "binary_tree_node.h"
 #include "test_framework/generic_test.h"
 
-int height(BinaryTreeNode<int>* node) {
+int height(const unique_ptr<BinaryTreeNode<int>>& node) {
     if (node == nullptr) {
         return 0;
     }
-    auto l = height(node->left.get());
-    auto r = height(node->right.get());
+    auto l = height(node->left);
+    auto r = height(node->right);
     return (l > r ? l : r) + 1;
 }
 
@@ -14,10 +14,9 @@ bool IsBalanced(const unique_ptr<BinaryTreeNode<int>>& tree) {
     if (tree == nullptr) {
         return true;
     }
-    int lHeight, rHeight;
-    lHeight = height(tree->left.get());
-    rHeight = height(tree->right.get());
-    return abs(lHeight - rHeight) <= 1 && IsBalanced(tree->left) && IsBalanced(tree->right);
+    auto l = height(tree->left);
+    auto r = height(tree->right);
+    return abs(l - r) <= 1 && IsBalanced(tree->left) && IsBalanced(tree->right);
 }
 
 int main(int argc, char* argv[]) {
