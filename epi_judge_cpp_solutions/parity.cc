@@ -1,12 +1,19 @@
 #include "test_framework/generic_test.h"
 
 short Parity(unsigned long long x) {
-  short result = 0;
-  while (x) {
-    result ^= (x & 1);
-    x >>= 1;
-  }
-  return result;
+//    short result = 0;
+//    while (x) {
+//    result ^= (x & 1);
+//    x >>= 1;
+//    }
+
+    uint8_t result {0};
+    while (x) {
+        result ^= 1u;
+        x &= (x-1);
+    }
+    return result;
+
 }
 
 int main(int argc, char* argv[]) {
