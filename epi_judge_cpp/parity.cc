@@ -12,7 +12,7 @@ short Parity(unsigned long long x) {
     //O(k), where k number of set bits in x
 //    uint8_t result {0};
 //    while (x) {
-//        result ^= 1u;
+//        result ^= 1u;     //^ operator changes the result to odd/even
 //        x &= (x-1);       //clears the lowest set bit of x
 //    }
 //    return result;
