@@ -1,6 +1,8 @@
 #include "test_framework/generic_test.h"
+#include <bitset>
+
 long long SwapBits(long long x, int i, int j) {
-    //brut-force, can be done without local variables creation
+    //A) brut-force, can be done without local variables creation
 //    auto bit_i = (x >> i) & 1;
 //    auto bit_j = (x >> j) & 1;
 //
@@ -12,11 +14,21 @@ long long SwapBits(long long x, int i, int j) {
 //    value = bit_i << j;
 //    x |= value;
 
+    //B) improved solution
     //do not need to perform swap if bit equals
-    if (((x >> i) & 1) != ((x >> j) & 1)) {
-        auto bit_mask = (1ULL << i) | (1ULL << j);
-        x ^= bit_mask;
-    }
+//    if (((x >> i) & 1) != ((x >> j) & 1)) {
+//        const auto bit_mask = (1ULL << i) | (1ULL << j);
+//        x ^= bit_mask;
+//    }
+
+    //C) using <bitset> STL header
+    std::bitset<64> b(x);
+    //swap bits
+    const bool temp = b[i];
+    b[i] = b[j];
+    b[j] = temp;
+    x = b.to_ullong();
+
     return x;
 }
 
