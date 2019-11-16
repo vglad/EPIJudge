@@ -1,7 +1,14 @@
 #include "test_framework/generic_test.h"
 unsigned long long ReverseBits(unsigned long long x) {
-  // TODO - you fill in here.
-  return 0;
+    uint64_t result {0};
+    for (auto i = 0; i < 64; ++i) {
+        if (x & 1) {
+            uint64_t y = 1ULL << (63 - i);
+            result |= y;
+        }
+        x >>= 1;
+    }
+    return result;
 }
 
 int main(int argc, char* argv[]) {
