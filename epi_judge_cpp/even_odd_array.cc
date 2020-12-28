@@ -7,9 +7,21 @@
 using std::vector;
 
 void EvenOdd(vector<int>* A_ptr) {
-  // TODO - you fill in here.
-  return;
+	auto &arr = *A_ptr;
+	auto ne = arr.begin();
+	auto no = arr.end() - 1;
+
+	for (size_t i = 0; i < arr.size(); ++i) {
+		if (*ne % 2 != 0) {
+			std::iter_swap (ne, no);
+			--no;
+		}
+		else {
+			++ne;
+		}
+	}
 }
+
 void EvenOddWrapper(TimedExecutor& executor, vector<int> A) {
   std::multiset<int> before(begin(A), end(A));
 
