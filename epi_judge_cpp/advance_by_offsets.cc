@@ -2,9 +2,17 @@
 
 #include "test_framework/generic_test.h"
 using std::vector;
+
 bool CanReachEnd(const vector<int>& max_advance_steps) {
-  // TODO - you fill in here.
-  return true;
+	auto maxReachIdx = 0;
+	auto lastIdx = max_advance_steps.size() - 1;
+
+	for (auto i = 0; i <= maxReachIdx && i < lastIdx; ++i)
+	{
+		maxReachIdx = std::max(maxReachIdx, i + max_advance_steps.at(i));
+	}
+
+	return maxReachIdx >= lastIdx;
 }
 
 int main(int argc, char* argv[]) {
